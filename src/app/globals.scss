@@ -1,0 +1,16 @@
+@import "~bootstrap/scss/bootstrap";
+
+main {
+  max-width: 100vw;
+  min-height: 100vh;
+  background-color: black;
+  color: white;
+}
+
+.switch_block {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10% 2%;
+}

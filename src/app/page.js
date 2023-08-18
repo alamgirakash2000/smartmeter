@@ -1,95 +1,71 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+
+import styles from "./globals.scss";
+import React, { useEffect, useState } from "react";
+import StartFirebase from "./firebaseConfig";
+import { ref, set, get, update, remove, child } from "firebase/database";
+
+import Switch from "./components/Switch";
 
 export default function Home() {
+  const [data, setData] = useState([]);
+  const [db, setDb] = useState(null);
+  let userId = "user01";
+
+  // For inserting New user
+  // const insertData = async () => {
+  //   const db = await StartFirebase();
+  //   await setDatabase(db);
+
+  //   let userId = "user01;
+  //   const user = {};
+
+  //   await set(ref(db, "Users/" + userId), user).then(() => {
+  //     console.log("Data write successful");
+  //   });
+  // };
+
+  const getData = async (id) => {
+    const database = await StartFirebase();
+    await setDb(database);
+
+    const dbRef = ref(database);
+    await get(child(dbRef, "Users/" + id)).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        setData(snapshot.val());
+      } else {
+        console.log("No user Found");
+      }
+    });
+  };
+
+  // Fetching Data
+  useEffect(() => {
+    getData(userId);
+  }, []);
+
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+      <div className='container py-3'>
+        <h1 className='text-success text-center'>
+          {" "}
+          These buttons are for controlling your load
+        </h1>
+        <div className='switch_block d-block'>
+          <div className='row my-3'>
+            <div className='col-md-4 my-5'>
+              <Switch l_Id={0} u_Id={userId} db={db} userData={data} />
+            </div>
+            <div className='col-md-4 my-5'>
+              <Switch l_Id={1} u_Id={userId} db={db} userData={data} />
+            </div>
+            <div className='col-md-4 my-5'>
+              <Switch l_Id={2} u_Id={userId} db={db} userData={data} />
+            </div>
+          </div>
         </div>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
     </main>
-  )
+  );
 }

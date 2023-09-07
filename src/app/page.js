@@ -6,6 +6,7 @@ import StartFirebase from "./firebaseConfig";
 import { ref, set, get, update, remove, child } from "firebase/database";
 
 import Switch from "./components/Switch";
+import Metering from "./components/Metering";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -48,19 +49,22 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className='container py-3'>
-        <h1 className='text-success text-center'>
-          {" "}
+        <h1 className='text-center my-5'>SMART-METERING SYSTEM</h1>
+        <div className='meter_block'>
+          <Metering l_Id={2} u_Id={userId} db={db} userData={data} />
+        </div>
+        <h1 className='text-success text-center mt-4'>
           These buttons are for controlling your load
         </h1>
         <div className='switch_block d-block'>
-          <div className='row my-3'>
-            <div className='col-md-4 my-5'>
+          <div className='row mb-3'>
+            <div className='col-sm-6 my-4'>
               <Switch l_Id={0} u_Id={userId} db={db} userData={data} />
             </div>
-            <div className='col-md-4 my-5'>
+            <div className='col-sm-6 my-4'>
               <Switch l_Id={1} u_Id={userId} db={db} userData={data} />
             </div>
-            <div className='col-md-4 my-5'>
+            <div className='col-sm-6 my-4'>
               <Switch l_Id={2} u_Id={userId} db={db} userData={data} />
             </div>
           </div>

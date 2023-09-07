@@ -1,0 +1,44 @@
+/* styles/Meter.scss */
+.meter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-top: 5px;
+}
+
+.meter {
+  width: 150px;
+  height: 150px;
+  background-color: #3498db; /* Background color for the meter */
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Arial", sans-serif;
+  font-weight: bold;
+  font-size: 36px;
+  color: #fff; /* Text color */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease-in-out;
+}
+
+.value {
+  margin-top: -10px; /* Adjust for vertical alignment */
+}
+
+.marker {
+  font-size: 20px;
+}
+
+.meter.animate {
+  transform: scale(1.1);
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  to {
+    transform: scale(1.2);
+  }
+}

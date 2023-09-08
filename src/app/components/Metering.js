@@ -19,6 +19,7 @@ const Metering = ({ l_Id, u_Id }) => {
   const [voltage, setVoltage] = useState();
   const [power, setPower] = useState();
   const [theta, setTheta] = useState();
+  const [energy, setEnergy] = useState();
 
   // Fetching Data
   useEffect(() => {
@@ -32,6 +33,11 @@ const Metering = ({ l_Id, u_Id }) => {
         setVoltage(snapshot.val().voltage);
         setPower(snapshot.val().power);
         setTheta(snapshot.val().factor);
+        setEnergy(snapshot.val().energy);
+
+        // await update(ref(database, "Users" + "user01"), {
+        //   energy: energy + power,
+        // });
       }
     });
   }, []);
@@ -50,16 +56,17 @@ const Metering = ({ l_Id, u_Id }) => {
         </div>
 
         <div className='row my-3 '>
-          <div className='col-sm-3'></div>
-          <div className='col-sm-3'>
+          <div className='col-sm-4'>
             <Meter value={theta} marker='Deg' />
           </div>
-          <div className='col-sm-3'>
+          <div className='col-sm-4'>
             <Meter
               value={voltage ? Math.abs(Math.cos(theta * 0.01745329)) : 0}
               marker='pF'
             />
-            <div className='col-sm-3'></div>
+          </div>
+          <div className='col-sm-4'>
+            <Meter value={energy} marker='Unit' />
           </div>
         </div>
       </div>

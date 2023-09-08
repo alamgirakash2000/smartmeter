@@ -34,10 +34,6 @@ const Metering = ({ l_Id, u_Id }) => {
         setPower(snapshot.val().power);
         setTheta(snapshot.val().factor);
         setEnergy(snapshot.val().energy);
-
-        // await update(ref(database, "Users" + "user01"), {
-        //   energy: energy + power,
-        // });
       }
     });
   }, []);
@@ -66,7 +62,7 @@ const Metering = ({ l_Id, u_Id }) => {
             />
           </div>
           <div className='col-sm-4'>
-            <Meter value={energy} marker='Unit' />
+            <Meter value={energy / 3600} marker='kWh' />
           </div>
         </div>
       </div>

@@ -20,7 +20,7 @@ const Meter = ({ value, marker }) => {
   return (
     <div className='meter-container'>
       <div className={`meter ${animationClass}`}>
-        <div className='value'>{value}</div>
+        <div className='value'>{value.toFixed(2)}</div>
         <div className='marker'>{marker}</div>
       </div>
     </div>

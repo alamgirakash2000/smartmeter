@@ -64,9 +64,6 @@ export default function Home() {
             <div className='col-sm-6 my-4'>
               <Switch l_Id={1} u_Id={userId} db={db} userData={data} />
             </div>
-            <div className='col-sm-6 my-4'>
-              <Switch l_Id={2} u_Id={userId} db={db} userData={data} />
-            </div>
           </div>
         </div>
       </div>

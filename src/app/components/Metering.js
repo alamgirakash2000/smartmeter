@@ -48,6 +48,17 @@ const Metering = ({ l_Id, u_Id }) => {
         <div className='col-sm-4'>
           <Meter value={power} marker='Watt' />
         </div>
+
+        <div className='row my-3 '>
+          <div className='col-sm-3'></div>
+          <div className='col-sm-3'>
+            <Meter value={theta} marker='Deg' />
+          </div>
+          <div className='col-sm-3'>
+            <Meter value={Math.cos(theta * 0.01745329)} marker='pF' />
+            <div className='col-sm-3'></div>
+          </div>
+        </div>
       </div>
     </div>
   );

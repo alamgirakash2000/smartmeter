@@ -62,7 +62,7 @@ const Metering = ({ l_Id, u_Id }) => {
             />
           </div>
           <div className='col-sm-4'>
-            <Meter value={energy / 3600} marker='kWh' />
+            <Meter value={energy / 3600} marker='Wh' />
           </div>
         </div>
       </div>

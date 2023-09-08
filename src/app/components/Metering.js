@@ -55,7 +55,10 @@ const Metering = ({ l_Id, u_Id }) => {
             <Meter value={theta} marker='Deg' />
           </div>
           <div className='col-sm-3'>
-            <Meter value={Math.cos(theta * 0.01745329)} marker='pF' />
+            <Meter
+              value={voltage ? Math.abs(Math.cos(theta * 0.01745329)) : 0}
+              marker='pF'
+            />
             <div className='col-sm-3'></div>
           </div>
         </div>
